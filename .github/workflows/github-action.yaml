@@ -4,23 +4,11 @@ on:
 name: Github Action
 
 env:
+  ECR_REGOSTRY: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com
   ECR_REPOSITORY: poapper-api
 
 jobs:
-  npm-build:
-    name: npm build check
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Use Node.js 16
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build
-  docker-build:
+  docker-build-and-push:
     name: Docker build check
     runs-on: ubuntu-20.04
     steps:
@@ -29,28 +17,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Docker build
-        run: docker build . -t $ECR_REPOSITORY
-  AWS-ECR-push:
-    name: Push Docker image to AWS ECR
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+        run: docker build . -t $ECR_REGISTRY/$ECR_REPOSITORY:latest
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Docker build
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: docker build . -t $ECR_REGISTRY/$ECR_REPOSITORY:latest
-
       - name: AWS ECR push
         run: docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
