@@ -9,7 +9,7 @@ env:
 
 jobs:
   docker-build-and-push:
-    name: Docker build check
+    name: Docker build and push
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -26,6 +26,6 @@ jobs:
           aws-region: ap-northeast-2
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+        uses: aws-actions/amazon-ecr-login@v1
       - name: AWS ECR push
         run: docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
