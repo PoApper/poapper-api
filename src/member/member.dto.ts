@@ -27,5 +27,8 @@ export class MemberDto {
   readonly badge: string[];
 
   @ApiProperty()
+  readonly tags: string[];
+
+  @ApiProperty()
   readonly status: MemberStatus;
 }

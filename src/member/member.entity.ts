@@ -34,6 +34,9 @@ export class MemberEntity {
   @Column({ type: 'simple-array' })
   badge: string[];
 
+  @Column({ type: 'simple-array' })
+  tags: string[];
+
   @Column({ default: MemberStatus.unknown })
   status: MemberStatus;
 
