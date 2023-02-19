@@ -6,6 +6,9 @@ on:
 
 name: Github Action
 
+env:
+  ECR_REPOSITORY: poapper-api
+
 jobs:
   npm-build:
     name: npm build check
@@ -28,4 +31,29 @@ jobs:
         uses: actions/checkout@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - run: docker build . -t nestjs-boilerplate
+      - name: Docker build
+        run: docker build . -t $ECR_REPOSITORY
+  AWS-ECR-push:
+    name: Push Docker image to AWS ECR
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Docker build
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: docker build . -t $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: AWS ECR push
+        run: docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
