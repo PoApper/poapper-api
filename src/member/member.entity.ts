@@ -6,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { MemberStatus } from "./member.type";
 
 @Entity()
 export class MemberEntity {
@@ -32,6 +33,9 @@ export class MemberEntity {
 
   @Column({ type: 'simple-array' })
   badge: string[];
+
+  @Column()
+  status: MemberStatus;
 
   @CreateDateColumn()
   created_at: Date;
