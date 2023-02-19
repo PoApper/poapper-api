@@ -6,7 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { MemberStatus } from "./member.type";
+import { MemberStatus } from './member.type';
 
 @Entity()
 export class MemberEntity {
@@ -19,10 +19,10 @@ export class MemberEntity {
   @Column()
   student_id: number; // 2023xxxx
 
-  @Column()
+  @Column({ nullable: true })
   github_id: string;
 
-  @Column()
+  @Column({ nullable: true })
   website_url: string;
 
   @Column({ type: 'text' })
@@ -34,7 +34,7 @@ export class MemberEntity {
   @Column({ type: 'simple-array' })
   badge: string[];
 
-  @Column()
+  @Column({ default: MemberStatus.unknown })
   status: MemberStatus;
 
   @CreateDateColumn()

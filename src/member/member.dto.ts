@@ -1,5 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { MemberStatus } from "./member.type";
 
 export class MemberDto {
   @IsNotEmpty()
@@ -24,4 +25,7 @@ export class MemberDto {
 
   @ApiProperty()
   readonly badge: string[];
+
+  @ApiProperty()
+  readonly status: MemberStatus;
 }
