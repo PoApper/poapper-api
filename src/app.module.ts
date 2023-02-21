@@ -4,7 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configurations';
-import { MemberModule } from "./member/member.module";
+import { MemberModule } from './member/member.module';
+import { GithubModule } from './github/github.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { MemberModule } from "./member/member.module";
       inject: [ConfigService],
     }),
     MemberModule,
+    GithubModule,
   ],
   controllers: [AppController],
   providers: [AppService],
