@@ -5,8 +5,6 @@ import { Octokit } from 'octokit';
 @ApiTags('Github')
 @Controller('github')
 export class GithubController {
-  constructor() {}
-
   gh_token = process.env.GITHUB_TOKEN;
 
   @Get()

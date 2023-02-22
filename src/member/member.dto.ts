@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { MemberStatus } from "./member.type";
+import { MemberStatus } from './member.type';
 
 export class MemberDto {
   @IsNotEmpty()

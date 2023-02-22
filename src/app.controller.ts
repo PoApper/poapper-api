@@ -13,9 +13,9 @@ export class AppController {
   @Get('/info')
   getInfo() {
     return {
-      "창립년도": 2010,
-      "동아리실": '학생회관 211호',
-    }
+      '창립년도': 2010,
+      '동아리실': '학생회관 211호',
+    };
   }
 
   @Get('/health/database')

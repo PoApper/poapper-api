@@ -1,7 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { MemberService } from "./member.service";
-import { MemberDto } from "./member.dto";
+import { MemberService } from './member.service';
+import { MemberDto } from './member.dto';
 
 @ApiTags('Member')
 @Controller('member')
@@ -13,26 +21,18 @@ export class MemberController {
     return this.memberService.getMemberList();
   }
 
-
   @Post()
-  addMember(
-    @Body() dto: MemberDto,
-  ) {
+  addMember(@Body() dto: MemberDto) {
     return this.memberService.createMember(dto);
   }
 
   @Put()
-  updateMember(
-    @Param('id') id: number,
-    @Body() dto: MemberDto,
-  ) {
+  updateMember(@Param('id') id: number, @Body() dto: MemberDto) {
     return this.memberService.updateMember(id, dto);
   }
 
   @Delete()
-  deleteMember(
-    @Param('id') id: number
-  ) {
+  deleteMember(@Param('id') id: number) {
     return this.memberService.deleteMember(id);
   }
 }
