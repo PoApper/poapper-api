@@ -13,10 +13,9 @@ async function bootstrap() {
   });
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('YOUR_SWAGGER_TITLE')
-    .setDescription('YOUR_SWAGGER_DESCRIPTION')
-    .setVersion('1.0')
-    .addTag('YOUR_TAG')
+    .setTitle('PoApper API')
+    .setDescription('')
+    .setVersion('0.1')
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('swagger', app, document);
