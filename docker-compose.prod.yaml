@@ -1,6 +1,8 @@
-version: '3'
+version: '3.8'
 services:
   api:
-    build: .
+    image: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/poapper-api:latest
     ports:
       - "4000:4000"
+    env_file:
+      - .env.production

@@ -6,14 +6,14 @@ services:
     ports:
       - "3306"
     environment:
-      MYSQL_ROOT_PASSWORD: nestjs_password
-      MYSQL_DATABASE: nestjs_database
+      MYSQL_ROOT_PASSWORD: popo_password
+      MYSQL_DATABASE: popo
     command:
       - --character-set-server=utf8mb4 # 한글 인코딩
       - --collation-server=utf8mb4_unicode_ci # 한글 인코딩
   api:
-    image: nestjs-boilerplate
-    container_name: nestjs-api
+    image: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/poapper-api:latest
+    container_name: popo-api
     ports:
       - "4000:4000"
     depends_on:
