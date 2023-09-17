@@ -7,7 +7,6 @@ export class MemberDto {
   @ApiProperty({ required: true })
   readonly name: string;
 
-  @IsNotEmpty()
   @ApiProperty({ required: true })
   readonly student_id: number;
 
