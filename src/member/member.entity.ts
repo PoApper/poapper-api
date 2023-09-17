@@ -16,7 +16,7 @@ export class MemberEntity {
   @PrimaryColumn()
   name: string; // 홍길동
 
-  @Column()
+  @Column({ nullable: true })
   student_id: number; // 2023xxxx
 
   @Column({ nullable: true })
@@ -32,12 +32,12 @@ export class MemberEntity {
   priority: number;
 
   @Column({ type: 'simple-array' })
-  badge: string[]; // President, Vice President, BackEnd Mentor, ...
+  badge: string[]; // PoApper_pre, Vice President, BackEnd Mentor, ...
 
   @Column({ type: 'simple-array' })
   tags: string[]; // #LoveDjango, #LoveReact, ...
 
-  @Column({ default: MemberStatus.unknown })
+  @Column({ default: MemberStatus.active })
   status: MemberStatus;
 
   @CreateDateColumn()
