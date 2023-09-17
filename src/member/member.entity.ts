@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { MemberStatus } from './member.type';
 
-@Entity()
+@Entity('member')
 export class MemberEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -32,10 +32,10 @@ export class MemberEntity {
   priority: number;
 
   @Column({ type: 'simple-array' })
-  badge: string[];
+  badge: string[]; // President, Vice President, BackEnd Mentor, ...
 
   @Column({ type: 'simple-array' })
-  tags: string[];
+  tags: string[]; // #LoveDjango, #LoveReact, ...
 
   @Column({ default: MemberStatus.unknown })
   status: MemberStatus;
