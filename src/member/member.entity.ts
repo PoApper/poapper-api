@@ -25,14 +25,14 @@ export class MemberEntity {
   @Column({ nullable: true })
   website_url: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   introduce_text: string;
 
   @Column()
   priority: number;
 
   @Column({ type: 'simple-array' })
-  badge: string[]; // PoApper_pre, Vice President, BackEnd Mentor, ...
+  badges: string[]; // PoApper_pre, Vice President, BackEnd Mentor, ...
 
   @Column({ type: 'simple-array' })
   tags: string[]; // #LoveDjango, #LoveReact, ...
