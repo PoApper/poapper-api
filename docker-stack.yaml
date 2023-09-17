@@ -3,9 +3,9 @@ services:
   dev:
     image: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/poapper-api:latest
     ports:
-      - 6000:4000
+      - 6001:4000
     secrets:
-      - source: poapper_api_dotenv
+      - source: poapper_api_dot_env
         target: /usr/src/app/.env
     logging:
       driver: local
@@ -17,13 +17,13 @@ services:
       placement:
         constraints:
           - node.role != manager
-          - node.labels.application != popo
+          - node.labels.application == poapper_web
   prod:
     image: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/poapper-api:vX.X.X
     ports:
-      - 4000:4000
+      - 4001:4000
     secrets:
-      - source: poapper_api_dotenv
+      - source: poapper_api_dot_env
         target: /usr/src/app/.env
     logging:
       driver: local
@@ -35,8 +35,8 @@ services:
       placement:
         constraints:
           - node.role != manager
-          - node.labels.application != popo
+          - node.labels.application == poapper_web
 
 secrets:
-  poapper_api_dotenv:
+  poapper_api_dot_env:
     external: true
