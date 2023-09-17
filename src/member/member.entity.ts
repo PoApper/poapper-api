@@ -31,10 +31,10 @@ export class MemberEntity {
   @Column()
   priority: number;
 
-  @Column({ type: 'simple-array' })
+  @Column({ type: 'simple-array', nullable: true })
   badges: string[]; // PoApper_pre, Vice President, BackEnd Mentor, ...
 
-  @Column({ type: 'simple-array' })
+  @Column({ type: 'simple-array', nullable: true })
   tags: string[]; // #LoveDjango, #LoveReact, ...
 
   @Column({ default: MemberStatus.active })
