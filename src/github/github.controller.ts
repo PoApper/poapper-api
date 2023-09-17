@@ -5,6 +5,8 @@ import { Octokit } from 'octokit';
 @ApiTags('Github')
 @Controller('github')
 export class GithubController {
+  // It's ok to access GitHub API without token, but it's limited to 60 requests per hour.
+  // TODO: maybe caching the response to help this limit.
   gh_token = process.env.GITHUB_TOKEN;
 
   @Get()
@@ -28,6 +30,6 @@ export class GithubController {
   @Get('event')
   getGithubEvent() {
     const octokit = new Octokit({ auth: this.gh_token });
-    return octokit.request('GET /orgs/poapper/events');
+    return octokit.request('GET /orgs/poapper/events?per_page=10');
   }
 }
