@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+  dev:
+    image: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/poapper-api:latest
+    ports:
+      - 6000:4000
+    secrets:
+      - source: poapper_api_dotenv
+        target: /usr/src/app/.env
+    logging:
+      driver: local
+      options:
+        max-size: 10m
+    deploy:
+      labels:
+        swarmpit.service.deployment.autoredeploy: 'true'
+      placement:
+        constraints:
+          - node.role != manager
+          - node.labels.application != popo
+  prod:
+    image: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/poapper-api:vX.X.X
+    ports:
+      - 4000:4000
+    secrets:
+      - source: poapper_api_dotenv
+        target: /usr/src/app/.env
+    logging:
+      driver: local
+      options:
+        max-size: 10m
+    deploy:
+      labels:
+        swarmpit.service.deployment.autoredeploy: 'true'
+      placement:
+        constraints:
+          - node.role != manager
+          - node.labels.application != popo
+
+secrets:
+  poapper_api_dotenv:
+    external: true
