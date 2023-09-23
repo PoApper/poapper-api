@@ -10,26 +10,30 @@ export class GithubController {
   gh_token = process.env.GITHUB_TOKEN;
 
   @Get()
-  getOrganizationInfo() {
+  async getOrganizationInfo() {
     const octokit = new Octokit({ auth: this.gh_token });
-    return octokit.request('GET /orgs/poapper');
+    const res = await octokit.request('GET /orgs/poapper');
+    return res.data;
   }
 
   @Get('member')
-  getGithubMembers() {
+  async getGithubMembers() {
     const octokit = new Octokit({ auth: this.gh_token });
-    return octokit.request('GET /orgs/poapper/public_members');
+    const res = await octokit.request('GET /orgs/poapper/public_members');
+    return res.data;
   }
 
   @Get('repo')
-  getGithubRepositories() {
+  async getGithubRepositories() {
     const octokit = new Octokit({ auth: this.gh_token });
-    return octokit.request('GET /orgs/poapper/repos');
+    const res = await octokit.request('GET /orgs/poapper/repos');
+    return res.data;
   }
 
   @Get('event')
-  getGithubEvent() {
+  async getGithubEvent() {
     const octokit = new Octokit({ auth: this.gh_token });
-    return octokit.request('GET /orgs/poapper/events?per_page=10');
+    const res = await octokit.request('GET /orgs/poapper/events?per_page=10');
+    return res.data;
   }
 }
