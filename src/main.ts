@@ -11,8 +11,9 @@ async function bootstrap() {
     origin: [
       'http://localhost:8000',
       'http://localhost:9000',
-      'https://poapper.com',
-      'https://dev.poapper.com',
+      'http://localhost:9001',
+      'https://poapper.club',
+      'https://dev.poapper.club',
     ],
     credentials: true,
   });
