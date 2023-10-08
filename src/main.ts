@@ -8,7 +8,13 @@ async function bootstrap() {
 
   app.use(cookieParser());
   app.enableCors({
-    origin: ['http://localhost:8000'],
+    origin: [
+      'http://localhost:8000',
+      'http://localhost:9000',
+      'http://localhost:9001',
+      'https://poapper.club',
+      'https://dev.poapper.club',
+    ],
     credentials: true,
   });
 
