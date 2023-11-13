@@ -4,8 +4,6 @@ import {
   Get,
   Post,
   UseGuards,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 
 import { AuthService } from './auth.service';
@@ -22,7 +20,6 @@ export class AuthController {
   }
 
   @Post('/login')
-  @UsePipes(ValidationPipe)
   async login(@Body() authLoginUserDto: AuthLoginUserDto) {
     return await this.awsCognitoService.authenticateUser(authLoginUserDto);
   }
