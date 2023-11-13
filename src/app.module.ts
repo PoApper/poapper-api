@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+
+import { AppService } from './app.service';
+import { AppController } from './app.controller';
 import configuration from './config/configurations';
 import { MemberModule } from './member/member.module';
 import { GithubModule } from './github/github.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +20,7 @@ import { GithubModule } from './github/github.module';
         configService.get('database'),
       inject: [ConfigService],
     }),
+    AuthModule,
     MemberModule,
     GithubModule,
   ],

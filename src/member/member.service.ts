@@ -8,22 +8,26 @@ import { MemberDto } from './member.dto';
 export class MemberService {
   constructor(
     @InjectRepository(MemberEntity)
-    private memoryRepository: Repository<MemberEntity>,
+    private memberRepository: Repository<MemberEntity>,
   ) {}
 
   getMemberList() {
-    return this.memoryRepository.find();
+    return this.memberRepository.find();
+  }
+
+  getMember(id: number) {
+    return this.memberRepository.findOneBy({ id: id });
   }
 
   createMember(dto: MemberDto) {
-    return this.memoryRepository.save(dto);
+    return this.memberRepository.save(dto);
   }
 
   updateMember(id: number, dto: MemberDto) {
-    return this.memoryRepository.update(id, dto);
+    return this.memberRepository.update(id, dto);
   }
 
   deleteMember(id: number) {
-    return this.memoryRepository.delete(id);
+    return this.memberRepository.delete(id);
   }
 }
